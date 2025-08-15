@@ -1,0 +1,63 @@
+# Render.com Configuration File
+# This file defines the services and their configurations for deployment on Render
+
+services:
+  # Web Service (Node.js Backend + Frontend)
+  - type: web
+    name: conecta-cordoba
+    env: node
+    region: oregon # or your preferred region
+    plan: starter # or free for development
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: JWT_SECRET
+        generateValue: true
+      - key: APP_NAME
+        value: Conecta Córdoba
+      - key: LOG_LEVEL
+        value: info
+      - key: ENABLE_PAYMENTS
+        value: false
+      - key: ENABLE_EMAIL_NOTIFICATIONS
+        value: false
+      - key: ENABLE_SMS_NOTIFICATIONS
+        value: false
+    # Environment variables that need to be set manually in Render dashboard:
+    # DATABASE_URL - will be provided by Render PostgreSQL addon
+    # DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD - extracted from DATABASE_URL
+    # APP_URL - set to your Render app URL
+
+  # PostgreSQL Database
+  - type: pserv
+    name: conecta-cordoba-db
+    env: postgres
+    region: oregon # should match web service region
+    plan: starter # or free for development
+    # Database will be automatically linked to web service
+    # DATABASE_URL will be automatically provided as environment variable
+
+# Additional configuration options:
+# 
+# Auto-deploy settings:
+# - Connect your GitHub repository
+# - Enable auto-deploy from main branch
+# - Set up build and deploy hooks if needed
+#
+# Health checks:
+# - Render automatically monitors service health
+# - Configure custom health check endpoints if needed
+#
+# Scaling:
+# - Adjust plan based on traffic needs
+# - Monitor metrics in Render dashboard
+#
+# Environment variables to set in Render dashboard:
+# 1. DATABASE_URL (automatically set by PostgreSQL service)
+# 2. JWT_SECRET (use Generate Value option)
+# 3. APP_URL (set to your Render app URL)
+# 4. Any other custom configuration values

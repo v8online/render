@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conecta Córdoba - Profesionales de Confianza</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/">
+                <i class="fas fa-handshake"></i> Conecta Córdoba
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/professionals">Buscar Profesionales</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/services">Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/zones">Zonas</a>
+                    </li>
+                </ul>
+                
+                <ul class="navbar-nav" id="navbarButtons">
+                    <!-- Se cargan dinámicamente con JavaScript -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero bg-gradient text-white py-5">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <h1 class="display-4 fw-bold mb-4">
+                            Conecta con los mejores profesionales de Córdoba
+                        </h1>
+                        <p class="lead mb-4">
+                            Encuentra profesionales de confianza en tu zona. Más de 140 localidades y 60 oficios disponibles.
+                        </p>
+                        <div class="d-flex gap-3">
+                            <button class="btn btn-light btn-lg" onclick="showBuscarProfesionales()">
+                                <i class="fas fa-search"></i> Buscar Profesionales
+                            </button>
+                            <button class="btn btn-outline-light btn-lg" onclick="showRegisterModal('profesional')">
+                                <i class="fas fa-plus"></i> Unirme como Profesional
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="text-center">
+                            <i class="fas fa-users display-1 opacity-75"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Statistics Section -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-md-3 mb-4">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body">
+                                <i class="fas fa-map-marker-alt text-primary fa-2x mb-3"></i>
+                                <h3 class="text-primary fw-bold">140+</h3>
+                                <p class="text-muted">Zonas de Córdoba</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body">
+                                <i class="fas fa-tools text-primary fa-2x mb-3"></i>
+                                <h3 class="text-primary fw-bold">60+</h3>
+                                <p class="text-muted">Oficios Disponibles</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body">
+                                <i class="fas fa-users text-primary fa-2x mb-3"></i>
+                                <h3 class="text-primary fw-bold" id="totalProfesionales">-</h3>
+                                <p class="text-muted">Profesionales Activos</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body">
+                                <i class="fas fa-star text-primary fa-2x mb-3"></i>
+                                <h3 class="text-primary fw-bold" id="promedioCalificaciones">-</h3>
+                                <p class="text-muted">Promedio de Calificaciones</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Professionals -->
+        <section class="py-5">
+            <div class="container">
+                <h2 class="text-center mb-5">Profesionales Destacados</h2>
+                <div class="row" id="featuredProfessionals">
+                    <!-- Se cargan dinámicamente -->
+                </div>
+                <div class="text-center mt-4">
+                    <button class="btn btn-primary" onclick="showBuscarProfesionales()">
+                        Ver Todos los Profesionales
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Reviews -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <h2 class="text-center mb-5">Opiniones Recientes</h2>
+                <div class="row" id="recentReviews">
+                    <!-- Se cargan dinámicamente -->
+                </div>
+            </div>
+        </section>
+
+        <!-- How it Works -->
+        <section class="py-5">
+            <div class="container">
+                <h2 class="text-center mb-5">¿Cómo Funciona?</h2>
+                <div class="row">
+                    <div class="col-md-4 text-center mb-4">
+                        <div class="card border-0 h-100">
+                            <div class="card-body">
+                                <i class="fas fa-search text-primary fa-3x mb-3"></i>
+                                <h4>1. Busca</h4>
+                                <p class="text-muted">Encuentra profesionales en tu zona por oficio o nombre</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center mb-4">
+                        <div class="card border-0 h-100">
+                            <div class="card-body">
+                                <i class="fas fa-handshake text-primary fa-3x mb-3"></i>
+                                <h4>2. Conecta</h4>
+                                <p class="text-muted">Conecta directamente con el profesional que necesites</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center mb-4">
+                        <div class="card border-0 h-100">
+                            <div class="card-body">
+                                <i class="fas fa-star text-primary fa-3x mb-3"></i>
+                                <h4>3. Califica</h4>
+                                <p class="text-muted">Califica tu experiencia para ayudar a otros usuarios</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="fas fa-handshake"></i> Conecta Córdoba</h5>
+                    <p class="text-muted">Conectando profesionales con clientes en toda la provincia de Córdoba.</p>
+                </div>
+                <div class="col-md-6">
+                    <h6>Enlaces Rápidos</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="/professionals" class="text-muted">Buscar Profesionales</a></li>
+                        <li><a href="/services" class="text-muted">Servicios</a></li>
+                        <li><a href="/zones" class="text-muted">Zonas</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p class="mb-0">&copy; 2024 Conecta Córdoba. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Iniciar Sesión</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="loginEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="loginPassword" required>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <p class="text-muted">¿No tienes cuenta? 
+                        <a href="#" onclick="showRegisterModal('cliente')">Regístrate como Cliente</a> o 
+                        <a href="#" onclick="showRegisterModal('profesional')">como Profesional</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerModalTitle">Registro</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="registerForm">
+                        <input type="hidden" id="tipoUsuario" value="cliente">
+                        <div class="mb-3">
+                            <label for="registerEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="registerEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerPassword" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="registerPassword" required minlength="6">
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
+                            <input type="password" class="form-control" id="confirmPassword" required>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Registrarse</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <p class="text-muted">¿Ya tienes cuenta? 
+                        <a href="#" onclick="showLoginModal()">Inicia Sesión</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Modal -->
+    <div class="modal fade" id="searchModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Buscar Profesionales</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="searchForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="searchOficio" class="form-label">Oficio</label>
+                                <select class="form-select" id="searchOficio">
+                                    <option value="">Todos los oficios</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="searchZona" class="form-label">Zona</label>
+                                <select class="form-select" id="searchZona">
+                                    <option value="">Todas las zonas</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="searchText" class="form-label">Buscar por nombre o descripción</label>
+                            <input type="text" class="form-control" id="searchText" placeholder="Buscar...">
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Buscar</button>
+                        </div>
+                    </form>
+                    <hr>
+                    <div id="searchResults"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert Toast -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="alertToast" class="toast" role="alert">
+            <div class="toast-header">
+                <strong class="me-auto" id="toastTitle">Notificación</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body" id="toastMessage">
+                Mensaje
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="/js/auth.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+{
+  "type": "web_service",
+  "name": "conecta-cordoba",
+  "repo": "https://github.com/v8online/render",
+  "branch": "main",
+  "buildCommand": "npm run build",
+  "startCommand": "npm start",
+  "envVars": [
+    {
+      "key": "NODE_ENV",
+      "value": "production"
+    },
+    {
+      "key": "JWT_SECRET",
+      "value": "conecta-cordoba-jwt-secret-2024-muy-seguro-cambiar-en-produccion"
+    },
+    {
+      "key": "APP_NAME", 
+      "value": "Conecta Córdoba"
+    },
+    {
+      "key": "LOG_LEVEL",
+      "value": "info"
+    }
+  ],
+  "serviceDetails": {
+    "runtime": "node",
+    "plan": "starter",
+    "region": "oregon",
+    "autoDeploy": true
+  }
+}
